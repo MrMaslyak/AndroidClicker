@@ -14,6 +14,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private ImageView btnTap, imageViewCoin, imageView;
     private TextView count;
     private int counter = 0;
+    private IDB database;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,7 +28,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                         | View.SYSTEM_UI_FLAG_FULLSCREEN
                         | View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY
         );
-
+        database = org.example.DataBase.getInstance();
         imageView = findViewById(R.id.gifimg);
         imageViewCoin = findViewById(R.id.coingif);
         btnTap = findViewById(R.id.gifimg);
@@ -52,6 +53,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private void incrementCounter() {
         counter++;
         count.setText(String.valueOf(counter));
+        database.save(counter);
+        System.out.println("database add " + counter);
     }
 
     @Override
